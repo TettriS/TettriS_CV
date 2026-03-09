@@ -1,5 +1,5 @@
 # Andrey Morozov
-### Senior Frontend Engineer | UI Architect | Fast Learner
+### Middle+/Senior Frontend Engineer | Fast Learner
 
 *Current contributions are primarily focused on private enterprise infrastructures (NDA).*
 
@@ -7,15 +7,15 @@
 
 ## 👋 About Me
 
-I don't just write code; I build digital systems that solve real business problems. With 6+ years of professional experience (ex-EPAM, Altcraft), I focus on the React ecosystem and complex architectural transformations.
+I don't just write code; I build digital systems that solve real business problems. With 6+ years of professional experience (ex-EPAM, Altcraft), I focus on the React ecosystem and Building scalable, high-performance web applications.
 
-I don't wait for instructions—I identify pain points and fix them with code. I'm an advocate for clean architecture and AI‑driven development to stay ahead of the curve. My current career goal is growing into a Tech Lead role where I can steer architectural decisions and mentor high‑performing teams.
+I don't wait for instructions — I identify pain points and fix them with code. I'm an advocate for clean architecture and AI‑driven development to stay ahead of the curve. My current career goal is growing into a Tech Lead role where I can Leading technical implementations and mentoring teams and mentor high‑performing teams.
 
 ---
 
 ## 🚀 Key Achievements
 
-- **Business Impact (EPAM)**: Architected a modular theming system that slashed branding Time‑to‑Market from 2 weeks to 30 minutes, enabling instant demos for major US banks.
+- **Business Impact (EPAM)**: Implemented and optimized a modular theming system that slashed branding Time‑to‑Market from 2 weeks to 30 minutes, enabling instant demos for major US banks.
 - **Rapid Infrastructure Deployment (Altcraft)**: Became a subject‑matter expert in push notification ecosystems (FCM, HMS, APNS). Built an Android app in Kotlin from scratch in just 3 weeks with zero prior mobile experience.
 - **Scalability & Legacy Modernization**: Successfully migrated a large‑scale Enterprise platform from jQuery to React + MobX, cutting maintenance overhead and support tickets by 50%.
 
@@ -75,12 +75,9 @@ I'm a problem‑solver who thrives on turning complex challenges into elegant, s
 
 ---
 
-## 📫 Let's Talk Architecture
+## 📫 Let's Connect
+> *"I don't just write code; I build digital systems that solve real business problems."*
 
 - **Email**: oiluohg@gmail.com
 - **LinkedIn**: [Andrey Morozov](https://www.linkedin.com/in/andrey-morozov-877a7b234)
 - **GitHub**: [TettriS](https://github.com/TettriS)
-
----
-
-> *"I don't just write code; I build digital systems that solve real business problems."*
