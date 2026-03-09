@@ -1,0 +1,313 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Andrey Morozov - TETTRIS HUD</title>
+    <style>
+        @import url('https://fonts.googleapis.com/css2?family=Share+Tech+Mono&display=swap');
+
+        :root {
+            --term-red: #ff0000;
+            --term-green: #00ff41;
+            --term-bg: #050505;
+            --term-grid: rgba(0, 255, 65, 0.1);
+        }
+
+        body {
+            background-color: var(--term-bg);
+            color: var(--term-green);
+            font-family: 'Share Tech Mono', monospace;
+            margin: 0;
+            overflow: hidden;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            height: 100vh;
+            text-transform: uppercase;
+        }
+
+        /* Tetris Rain Background */
+        .tetris-rain {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            pointer-events: none;
+            z-index: 0;
+            opacity: 0.15;
+        }
+
+        .falling-piece {
+            position: absolute;
+            background: var(--term-green);
+            box-shadow: 0 0 5px var(--term-green);
+            animation: fall linear forwards;
+        }
+
+        @keyframes fall {
+            from { transform: translateY(-100px) rotate(0deg); }
+            to { transform: translateY(110vh) rotate(360deg); }
+        }
+
+        /* Fix from Andrey: Pixel-perfect shapes */
+        .p-i { width: 10px; height: 40px; }
+        .p-o { width: 20px; height: 20px; }
+        .p-t { 
+            width: 10px; height: 10px; 
+            box-shadow: 0px 10px 0 var(--term-green), -10px 10px 0 var(--term-green), 10px 10px 0 var(--term-green); 
+        }
+
+        .hud-container {
+            width: 95vw;
+            height: 95vh;
+            border: 2px solid var(--term-green);
+            position: relative;
+            z-index: 10;
+            background-image: 
+                linear-gradient(var(--term-grid) 1px, transparent 1px),
+                linear-gradient(90deg, var(--term-grid) 1px, transparent 1px);
+            background-size: 40px 40px;
+            padding: 30px;
+            box-sizing: border-box;
+            box-shadow: inset 0 0 100px rgba(0, 255, 65, 0.2);
+            background-color: rgba(5, 5, 5, 0.85);
+            display: flex;
+            flex-direction: column;
+        }
+
+        /* Scanline Effect */
+        .scan-line {
+            height: 3px;
+            background: rgba(0, 255, 65, 0.6);
+            width: 100%;
+            position: absolute;
+            top: 0;
+            left: 0;
+            animation: scan 6s linear infinite;
+            box-shadow: 0 0 20px var(--term-green);
+            z-index: 20;
+            pointer-events: none;
+        }
+
+        @keyframes scan { 0% { top: 0; } 100% { top: 100%; } }
+
+        .header {
+            display: flex;
+            justify-content: space-between;
+            border-bottom: 2px solid var(--term-green);
+            padding-bottom: 15px;
+            margin-bottom: 25px;
+            font-size: 1.2rem;
+        }
+
+        .recording {
+            color: var(--term-red);
+            animation: blink 1s infinite;
+        }
+
+        @keyframes blink { 0%, 100% { opacity: 1; } 50% { opacity: 0.3; } }
+
+        .content-grid {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 30px;
+            flex-grow: 1;
+            overflow: hidden;
+        }
+
+        .column {
+            display: flex;
+            flex-direction: column;
+            gap: 20px;
+        }
+
+        .stats-box {
+            border: 1px solid var(--term-green);
+            padding: 20px;
+            background: rgba(0, 40, 0, 0.4);
+            position: relative;
+            overflow: hidden;
+        }
+
+        .stats-box::before {
+            content: "";
+            position: absolute;
+            top: 0; left: 0;
+            width: 100%; height: 5px;
+            background: var(--term-green);
+            opacity: 0.3;
+        }
+
+        h2 { font-size: 1.4rem; margin: 0 0 15px 0; color: #fff; text-shadow: 0 0 10px var(--term-green); }
+        p { margin: 8px 0; line-height: 1.4; font-size: 1rem; }
+        
+        .skill-tag {
+            display: inline-block;
+            border: 1px solid var(--term-green);
+            padding: 2px 8px;
+            margin: 3px;
+            font-size: 0.85rem;
+            background: rgba(0, 255, 65, 0.1);
+        }
+
+        /* Image "Green Sepia" Effect */
+        .img-container {
+            width: 100%;
+            height: 150px;
+            border: 1px solid var(--term-green);
+            margin-bottom: 10px;
+            overflow: hidden;
+            position: relative;
+        }
+
+        .img-container img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+            /* The "Magic" Green Filter */
+            filter: sepia(100%) hue-rotate(80deg) saturate(300%) brightness(0.7);
+            mix-blend-mode: screen;
+        }
+
+        .img-container::after {
+            content: "";
+            position: absolute;
+            top: 0; left: 0;
+            width: 100%; height: 100%;
+            background: rgba(0, 255, 65, 0.2);
+            pointer-events: none;
+        }
+
+        .glitch { animation: glitch 3s infinite; }
+        @keyframes glitch {
+            0% { transform: translate(0); }
+            2% { transform: translate(-3px, 1px); }
+            4% { transform: translate(3px, -1px); }
+            6% { transform: translate(0); }
+        }
+
+        .footer {
+            margin-top: auto;
+            border-top: 1px solid var(--term-green);
+            padding-top: 15px;
+            display: flex;
+            justify-content: space-between;
+            font-size: 0.9rem;
+            opacity: 0.8;
+        }
+
+        /* Custom Cursor */
+        a, button, .pointer {
+            cursor: url("data:image/svg+xml,%3Csvg width='24' height='24' viewBox='0 0 24 24' fill='none' xmlns='http://www.w3.org/2000/svg'%3E%3Cpath d='M2 2L22 10L10 10L10 22L2 2Z' fill='%23004D14' stroke='%2300FF41' stroke-width='1'/%3E%3C/svg%3E") 2 2, pointer;
+        }
+
+        .pointer a:hover, .pointer button:hover {
+            cursor: url("data:image/svg+xml,%3Csvg width='24' height='24' viewBox='0 0 24 24' fill='none' xmlns='http://www.w3.org/2000/svg'%3E%3Cpath d='M2 2L22 10L10 10L10 22L2 2Z' fill='%2300FF41' stroke='%2300FF41' stroke-width='1'/%3E%3C/svg%3E") 2 2, pointer;
+        }
+
+        /* Ancor Links */
+        a { color: var(--term-green); text-decoration: underline; }
+        a:hover, a:focus { text-decoration: none; outline: var(--term-green) solid 1px; }
+
+    </style>
+</head>
+<body class="pointer">
+    <div class="tetris-rain" id="tetris-rain"></div>
+    
+    <div class="hud-container">
+        <div class="scan-line"></div>
+        
+        <div class="header">
+            <div class="glitch">TARGET: ANDREY MOROZOV [TETTRIS]</div>
+            <div class="recording">● REC [2026-03-09] // STATUS: OVERCLOCKED</div>
+        </div>
+
+        <div class="content-grid">
+            <!-- Left Column: Bio & Achievements -->
+            <div class="column">
+                <div class="stats-box">
+                    <h2>>>> CLASSIFIED: SENIOR ARCHITECT</h2>
+                    <p>> EXP: 6.5 YEARS (EX-EPAM, ALTCRAFT)</p>
+                    <p>> MISSION: SCALE BUSINESS VALUE VIA TECH</p>
+                    <p>> STYLE: AI-DRIVEN DEVELOPMENT</p>
+                </div>
+
+                <div class="stats-box" style="border-color: var(--term-red);">
+                    <h2>>>> MISSION ACHIEVEMENTS</h2>
+                    <p><span style="color: var(--term-red)">[SUCCESS]</span> T-TO-MARKET: 2W -> 30M (NYMBUS/EPAM)</p>
+                    <p><span style="color: var(--term-red)">[SUCCESS]</span> MOBILE DEPLOY: 3 WEEKS (KOTLIN)</p>
+                    <p><span style="color: var(--term-red)">[SUCCESS]</span> MODERNIZATION: 50% TICKETS REDUCED</p>
+                </div>
+                
+                <div class="stats-box">
+                    <h2>>>> TARGET VIBE</h2>
+                    <p>"I don't just write code; I build digital systems that solve real business problems."</p>
+                </div>
+            </div>
+
+            <!-- Right Column: Skills & Visuals -->
+            <div class="column">
+                <div class="stats-box">
+                    <h2>>>> TECHNICAL ARSENAL</h2>
+                    <div class="skills-list">
+                        <span class="skill-tag">TYPESCRIPT</span><span class="skill-tag">REACT</span>
+                        <span class="skill-tag">NEXT.JS</span><span class="skill-tag">REDUX TOOLKIT</span>
+                        <span class="skill-tag">MOBX</span><span class="skill-tag">REACT NATIVE</span>
+                        <span class="skill-tag">ELECTRON</span><span class="skill-tag">KOTLIN</span>
+                        <span class="skill-tag">SERVICE WORKERS</span><span class="skill-tag">DOCKER</span>
+                        <span class="skill-tag">CI/CD</span><span class="skill-tag">AI (CURSOR/ROO)</span>
+                    </div>
+                </div>
+
+                <!-- <div class="stats-box">
+                    <h2>>>> VISUAL RECON</h2>
+                    <div class="img-container">
+                        <img src="https://images.unsplash.com/photo-1550751827-4bd374c3f58b?auto=format&fit=crop&q=80&w=1000" alt="Tech Recon">
+                    </div>
+                    <p>ANALYSIS: OPTIMIZED INTERFACE DETECTED</p>
+                </div> -->
+
+                <div class="stats-box" style="background: rgba(255, 0, 0, 0.1); border-color: var(--term-red);">
+                    <h2>SYSTEM OVERRIDE</h2>
+                    <p>SEEKING: TECH LEAD / ARCHITECT ROLES</p>
+                    <p>LOC: RUSSIAN FEDERATION / RYAZAN / MOSCOW / REMOTE</p>
+                </div>
+            </div>
+        </div>
+
+        <div class="footer">
+            <div>
+              <a href="mailto:oiluohg@gmail.com">OILUOHG@GMAIL.COM</a>
+              <span> // </span>
+              <a href="https://github.com/TettriS" target="_blank">GITHUB.COM/TETTRIS</a>
+              <span> // </span>
+              <a href="www.linkedin.com/in/andrey-morozov-877a7b234" target="_blank">LINKEDIN.COM/IN/ANDREY-MOROZOV-877A7B234</a>
+            </div>
+            <div>[SYS_V3.0.1_TETTRIS_HUD]</div>
+        </div>
+    </div>
+
+    <script>
+        const rainContainer = document.getElementById('tetris-rain');
+        const pieceClasses = ['p-i', 'p-o', 'p-t'];
+        
+        function createPiece() {
+            const piece = document.createElement('div');
+            const type = pieceClasses[Math.floor(Math.random() * pieceClasses.length)];
+            piece.className = `falling-piece ${type}`;
+            
+            piece.style.left = Math.random() * 100 + 'vw';
+            const duration = Math.random() * 5 + 5; 
+            piece.style.animationDuration = duration + 's';
+            
+            rainContainer.appendChild(piece);
+            setTimeout(() => { piece.remove(); }, duration * 1000);
+        }
+
+        for(let i=0; i<15; i++) { setTimeout(createPiece, Math.random() * 5000); }
+        setInterval(createPiece, 1000);
+    </script>
+</body>
+</html>
