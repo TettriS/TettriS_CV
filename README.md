@@ -76,8 +76,10 @@ I'm a problem‑solver who thrives on turning complex challenges into elegant, s
 ---
 
 ## 📫 Let's Connect
-> *"I don't just write code; I build digital systems that solve real business problems."*
 
 - **Email**: oiluohg@gmail.com
 - **LinkedIn**: [Andrey Morozov](https://www.linkedin.com/in/andrey-morozov-877a7b234)
 - **GitHub**: [TettriS](https://github.com/TettriS)
+
+> *"I don't just write code; I build digital systems that solve real business problems."*
+
