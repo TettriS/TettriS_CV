@@ -19,12 +19,13 @@
             color: var(--term-green);
             font-family: 'Share Tech Mono', monospace;
             margin: 0;
-            overflow: hidden;
+            overflow-x: hidden;
             display: flex;
             justify-content: center;
             align-items: center;
-            height: 100vh;
+            height: 100%;
             text-transform: uppercase;
+            padding: 5%;
         }
 
         /* Tetris Rain Background */
@@ -47,8 +48,8 @@
         }
 
         @keyframes fall {
-            from { transform: translateY(-100px) rotate(0deg); }
-            to { transform: translateY(110vh) rotate(360deg); }
+            from { transform: translateY(0px) rotate(0deg); }
+            to { transform: translateY(90vh) rotate(360deg); }
         }
 
         /* Fix from Andrey: Pixel-perfect shapes */
@@ -105,6 +106,10 @@
         .recording {
             color: var(--term-red);
             animation: blink 1s infinite;
+        }
+
+        .recording span {
+            word-break: keep-all;
         }
 
         @keyframes blink { 0%, 100% { opacity: 1; } 50% { opacity: 0.3; } }
@@ -211,6 +216,11 @@
         a { color: var(--term-green); text-decoration: underline; }
         a:hover, a:focus { text-decoration: none; outline: var(--term-green) solid 1px; }
 
+        /* Mobile Styles */
+        @media (max-width: 768px) {
+            .content-grid { grid-template-columns: 1fr; }
+            .hud-container { height: auto; min-height: 95vh; }
+        }
     </style>
 </head>
 <body class="pointer">
@@ -220,8 +230,12 @@
         <div class="scan-line"></div>
         
         <div class="header">
-            <div class="glitch">TARGET: ANDREY MOROZOV [TETTRIS]</div>
-            <div class="recording">● REC [2026-03-09] // STATUS: OVERCLOCKED</div>
+            <div class="glitch">TARGET: ANDREY [TETTRIS] MOROZOV</div>
+            <div class="recording">
+                <span>● REC [2026-03-09]</span>
+                <span> // </span>
+                <span>STATUS: OVERCLOCKED</span>
+            </div>
         </div>
 
         <div class="content-grid">
@@ -252,12 +266,18 @@
                 <div class="stats-box">
                     <h2>>>> TECHNICAL ARSENAL</h2>
                     <div class="skills-list">
-                        <span class="skill-tag">TYPESCRIPT</span><span class="skill-tag">REACT</span>
-                        <span class="skill-tag">NEXT.JS</span><span class="skill-tag">REDUX TOOLKIT</span>
-                        <span class="skill-tag">MOBX</span><span class="skill-tag">REACT NATIVE</span>
-                        <span class="skill-tag">ELECTRON</span><span class="skill-tag">KOTLIN</span>
-                        <span class="skill-tag">SERVICE WORKERS</span><span class="skill-tag">DOCKER</span>
-                        <span class="skill-tag">CI/CD</span><span class="skill-tag">AI (CURSOR/ROO)</span>
+                        <span class="skill-tag">TYPESCRIPT</span>
+                        <span class="skill-tag">REACT</span>
+                        <span class="skill-tag">NEXT.JS</span>
+                        <span class="skill-tag">REDUX TOOLKIT</span>
+                        <span class="skill-tag">MOBX</span>
+                        <span class="skill-tag">REACT NATIVE</span>
+                        <span class="skill-tag">ELECTRON</span>
+                        <span class="skill-tag">KOTLIN</span>
+                        <span class="skill-tag">SERVICE WORKERS</span>
+                        <span class="skill-tag">DOCKER</span>
+                        <span class="skill-tag">CI/CD</span>
+                        <span class="skill-tag">AI (CURSOR/ROO)</span>
                     </div>
                 </div>
 
@@ -272,7 +292,7 @@
                 <div class="stats-box" style="background: rgba(255, 0, 0, 0.1); border-color: var(--term-red);">
                     <h2>SYSTEM OVERRIDE</h2>
                     <p>SEEKING: TECH LEAD / ARCHITECT ROLES</p>
-                    <p>LOC: RUSSIAN FEDERATION / RYAZAN / MOSCOW / REMOTE</p>
+                    <p>LOC: REMOTE / RELOCATION READY</p>
                 </div>
             </div>
         </div>
