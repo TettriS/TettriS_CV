@@ -7,9 +7,7 @@
 
 ## 👋 About Me
 
-I don't just write code; I build digital systems that solve real business problems. With 6+ years of professional experience (ex-EPAM, Altcraft), I focus on the React ecosystem and Building scalable, high-performance web applications.
-
-I don't wait for instructions — I identify pain points and fix them with code. I'm an advocate for clean architecture and AI‑driven development to stay ahead of the curve. My current career goal is growing into a Tech Lead role where I can Leading technical implementations and mentoring teams and mentor high‑performing teams.
+I build digital systems that solve real business problems. With 6+ years of professional experience (ex-EPAM, Altcraft), I focus on delivering high-performance web applications and mentoring engineering teams. I leverage AI-augmented development (Cursor, Roo Code) to multiply velocity without sacrificing code quality.
 
 ---
 
@@ -82,4 +80,5 @@ I'm a problem‑solver who thrives on turning complex challenges into elegant, s
 - **GitHub**: [TettriS](https://github.com/TettriS)
 
 > *"I don't just write code; I build digital systems that solve real business problems."*
+
 
